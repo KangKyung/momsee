@@ -53,12 +53,12 @@ public class MainActivity extends AppCompatActivity
     private static final int FASTEST_UPDATE_INTERVAL_MS = 500; // 0.5초
 
 
-    // onRequestPermissionsResult에서 수신된 결과에서 ActivityCompat.requestPermissions를 사용한 퍼미션 요청을 구별하기 위해 사용됩니다.
+    // onRequestPermissionsResult에서 수신된 결과에서 ActivityCompat.requestPermissions를 사용한 퍼미션 요청을 구별하기 위해 사용
     private static final int PERMISSIONS_REQUEST_CODE = 100;
     boolean needRequest = false;
 
 
-    // 앱을 실행하기 위해 필요한 퍼미션을 정의합니다.
+    // 앱을 실행하기 위해 필요한 퍼미션을 정의
     String[] REQUIRED_PERMISSIONS  = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};  // 외부 저장소
 
 
@@ -71,8 +71,8 @@ public class MainActivity extends AppCompatActivity
     private Location location;
 
 
-    private View mLayout;  // Snackbar 사용하기 위해서는 View가 필요합니다.
-    // (참고로 Toast에서는 Context가 필요했습니다.)
+    private View mLayout;  // Snackbar 사용하기 위해서는 View가 필요
+    // (Toast에서는 Context가 필요)
 
 
     @Override
@@ -198,7 +198,7 @@ public class MainActivity extends AppCompatActivity
 
 
         //런타임 퍼미션 처리
-        // 1. 위치 퍼미션을 가지고 있는지 체크합니다.
+        // 1. 위치 퍼미션을 가지고 있는지 체크
         int hasFineLocationPermission = ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION);
         int hasCoarseLocationPermission = ContextCompat.checkSelfPermission(this,
@@ -210,25 +210,25 @@ public class MainActivity extends AppCompatActivity
                 hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED   ) {
 
             // 2. 이미 퍼미션을 가지고 있다면
-            // ( 안드로이드 6.0 이하 버전은 런타임 퍼미션이 필요없기 때문에 이미 허용된 걸로 인식합니다.)
+            // ( 안드로이드 6.0 이하 버전은 런타임 퍼미션이 필요없기 때문에 이미 허용된 걸로 인식함)
 
 
             startLocationUpdates(); // 3. 위치 업데이트 시작
 
 
-        }else {  //2. 퍼미션 요청을 허용한 적이 없다면 퍼미션 요청이 필요합니다. 2가지 경우(3-1, 4-1)가 있습니다.
+        }else {  //2. 퍼미션 요청을 허용한 적이 없다면 퍼미션 요청이 필요합니다. 2가지 경우(3-1, 4-1)가 있음
 
             // 3-1. 사용자가 퍼미션 거부를 한 적이 있는 경우에는
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0])) {
 
-                // 3-2. 요청을 진행하기 전에 사용자가에게 퍼미션이 필요한 이유를 설명해줄 필요가 있습니다.
+                // 3-2. 요청을 진행하기 전에 사용자가에게 퍼미션이 필요한 이유를 설명해줄 필요가 있음
                 Snackbar.make(mLayout, "이 앱을 실행하려면 위치 접근 권한이 필요합니다.",
                         Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener() {
 
                     @Override
                     public void onClick(View view) {
 
-                        // 3-3. 사용자게에 퍼미션 요청을 합니다. 요청 결과는 onRequestPermissionResult에서 수신됩니다.
+                        // 3-3. 사용자게에 퍼미션 요청을 합니다. 요청 결과는 onRequestPermissionResult에서 수신됨
                         ActivityCompat.requestPermissions( MainActivity.this, REQUIRED_PERMISSIONS,
                                 PERMISSIONS_REQUEST_CODE);
                     }
@@ -236,8 +236,8 @@ public class MainActivity extends AppCompatActivity
 
 
             } else {
-                // 4-1. 사용자가 퍼미션 거부를 한 적이 없는 경우에는 퍼미션 요청을 바로 합니다.
-                // 요청 결과는 onRequestPermissionResult에서 수신됩니다.
+                // 4-1. 사용자가 퍼미션 거부를 한 적이 없는 경우에는 퍼미션 요청을 바로 함
+                // 요청 결과는 onRequestPermissionResult에서 수신됨
                 ActivityCompat.requestPermissions( this, REQUIRED_PERMISSIONS,
                         PERMISSIONS_REQUEST_CODE);
             }
@@ -413,7 +413,7 @@ public class MainActivity extends AppCompatActivity
 
 
     /*
-     * ActivityCompat.requestPermissions를 사용한 퍼미션 요청의 결과를 리턴받는 메소드입니다.
+     * ActivityCompat.requestPermissions를 사용한 퍼미션 요청의 결과를 리턴받는 메소드
      */
     @Override
     public void onRequestPermissionsResult(int permsRequestCode,
@@ -427,7 +427,7 @@ public class MainActivity extends AppCompatActivity
             boolean check_result = true;
 
 
-            // 모든 퍼미션을 허용했는지 체크합니다.
+            // 모든 퍼미션을 허용했는지 체크
 
             for (int result : grandResults) {
                 if (result != PackageManager.PERMISSION_GRANTED) {
@@ -439,17 +439,17 @@ public class MainActivity extends AppCompatActivity
 
             if ( check_result ) {
 
-                // 퍼미션을 허용했다면 위치 업데이트를 시작합니다.
+                // 퍼미션을 허용했다면 위치 업데이트를 시작
                 startLocationUpdates();
             }
             else {
-                // 거부한 퍼미션이 있다면 앱을 사용할 수 없는 이유를 설명해주고 앱을 종료합니다.2 가지 경우가 있습니다.
+                // 거부한 퍼미션이 있다면 앱을 사용할 수 없는 이유를 설명해주고 앱을 종료. 2 가지 경우가 있음
 
                 if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0])
                         || ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[1])) {
 
 
-                    // 사용자가 거부만 선택한 경우에는 앱을 다시 실행하여 허용을 선택하면 앱을 사용할 수 있습니다.
+                    // 사용자가 거부만 선택한 경우에는 앱을 다시 실행하여 허용을 선택하면 앱을 사용할 수 있음
                     Snackbar.make(mLayout, "퍼미션이 거부되었습니다. 앱을 다시 실행하여 퍼미션을 허용해주세요. ",
                             Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener() {
 
@@ -463,7 +463,7 @@ public class MainActivity extends AppCompatActivity
                 }else {
 
 
-                    // "다시 묻지 않음"을 사용자가 체크하고 거부를 선택한 경우에는 설정(앱 정보)에서 퍼미션을 허용해야 앱을 사용할 수 있습니다.
+                    // "다시 묻지 않음"을 사용자가 체크하고 거부를 선택한 경우에는 설정(앱 정보)에서 퍼미션을 허용해야 앱을 사용할 수 있음
                     Snackbar.make(mLayout, "퍼미션이 거부되었습니다. 설정(앱 정보)에서 퍼미션을 허용해야 합니다. ",
                             Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener() {
 
