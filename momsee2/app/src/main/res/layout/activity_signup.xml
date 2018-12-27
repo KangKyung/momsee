@@ -3,13 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.jiinheo.momsee.loginActivity">
+    android:layout_height="match_parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp">
 
         <TextView
@@ -19,47 +18,66 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="85dp"
-            android:text="환영합니다 : )"
+            android:text="회원가입:)"
             android:textSize="30dp" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/Email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
             android:layout_below="@+id/textView2"
-            android:layout_marginEnd="11dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="100dp"
-            android:layout_toStartOf="@+id/editText2"
-            android:text="Email :"
+            android:text="사용할 Email :"
             android:textSize="17dp" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/passwordView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/textView3"
-            android:layout_below="@+id/textView3"
-            android:layout_marginTop="20dp"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/passwordConfirm"
             android:text="비밀번호 : "
             android:textSize="17dp" />
 
+        <TextView
+            android:id="@+id/passwordConfirmView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/password"
+            android:layout_toStartOf="@+id/passwordConfirm"
+            android:text="비밀번호 확인 :"
+            android:textSize="17dp" />
 
         <EditText
             android:id="@+id/editText2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/textView3"
-            android:layout_alignStart="@+id/textView2"
-            android:layout_marginStart="20dp"
+            android:layout_alignStart="@+id/passwordConfirm"
+            android:layout_below="@+id/passwordConfirm"
+            android:layout_marginTop="10dp"
             android:ems="10"
             android:inputType="textEmailAddress" />
 
         <EditText
-            android:id="@+id/editText3"
+            android:id="@+id/password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/textView4"
-            android:layout_alignStart="@+id/editText2"
+            android:layout_alignStart="@+id/passwordConfirm"
+            android:layout_below="@+id/passwordConfirm"
+            android:layout_marginTop="67dp"
+            android:ems="10"
+            android:inputType="textPassword" />
+
+        <EditText
+            android:id="@+id/passwordConfirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/Email"
+            android:layout_alignBottom="@+id/Email"
+            android:layout_marginStart="18dp"
+            android:layout_toEndOf="@+id/Email"
             android:ems="10"
             android:inputType="textPassword" />
 
@@ -67,11 +85,11 @@
             android:id="@+id/button"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/editText3"
-            android:layout_marginTop="46dp"
-            android:layout_toEndOf="@+id/textView3"
+            android:layout_below="@+id/passwordConfirmView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="72dp"
             android:background="@drawable/coner"
-            android:text="다음"
+            android:text="확인"
             android:textColor="#444444"
             android:textSize="20dp"
             android:textStyle="bold" />
