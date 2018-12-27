@@ -18,7 +18,6 @@ import java.util.ArrayList;
 
 public class activity_child_info extends AppCompatActivity {
 
-    static final String[] LIST_MENU = {"LIST1", "LIST2", "LIST3"} ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 

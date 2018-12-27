@@ -37,7 +37,8 @@
         <activity android:name=".SignupActivity" />
         <activity android:name=".Parent_main" />
         <activity android:name=".activity_child_info" />
-        <activity android:name=".Maps"></activity>
+        <activity android:name=".Maps" />
+        <activity android:name=".child_chatting" />
     </application>
 
 </manifest>

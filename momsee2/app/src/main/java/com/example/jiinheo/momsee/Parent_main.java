@@ -23,6 +23,10 @@ TabHost tabHost;
         tabSpec = tabHost.newTabSpec("FirstTab").setIndicator("자식 목록").setContent(intent);
         tabHost.addTab(tabSpec);
 
+        intent = new Intent(this, child_chatting.class);
+        tabSpec = tabHost.newTabSpec("SecondTab").setIndicator("채팅 목록").setContent(intent);
+        tabHost.addTab(tabSpec);
+
 
         tabHost.getTabWidget().setCurrentTab(0);
     }
