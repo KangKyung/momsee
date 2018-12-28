@@ -23,7 +23,7 @@
         <meta-data
             android:name = "com.google.android.geo.API_KEY"
             android:value = "AIzaSyB7ml8yPKY12_IANO0-xf_cgm7cxsXTo84"/>
-        <activity android:name=".MainActivity" />
+
         <activity android:name=".mainloginActivity" />
         <activity android:name=".selectActivity" />
         <activity android:name=".P_permissionActivity" />
