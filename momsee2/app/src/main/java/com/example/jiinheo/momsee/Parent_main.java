@@ -27,6 +27,10 @@ TabHost tabHost;
         tabSpec = tabHost.newTabSpec("SecondTab").setIndicator("채팅 목록").setContent(intent);
         tabHost.addTab(tabSpec);
 
+        intent = new Intent(this, Maps.class);
+        tabSpec = tabHost.newTabSpec("ThirdTab").setIndicator("자식 위치").setContent(intent);
+        tabHost.addTab(tabSpec);
+
 
         tabHost.getTabWidget().setCurrentTab(0);
     }

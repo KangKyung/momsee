@@ -43,10 +43,10 @@ public class child_chatting extends AppCompatActivity {
 
         //항목선택
 
-        MyList.setDivider(new ColorDrawable(Color.BLACK));
+        MyList.setDivider(new ColorDrawable(Color.GRAY));
         //항목 사이 구분선
 
-        MyList.setDividerHeight(10);
+        MyList.setDividerHeight(70);
         //구분선 높이 지정
 
 
