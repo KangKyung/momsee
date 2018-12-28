@@ -28,7 +28,7 @@ Button perOk;
     }
     private void CheckPermission(){
 
-        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS,Manifest.permission.ACCESS_WIFI_STATE,Manifest.permission.CONTROL_LOCATION_UPDATES,
+        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS,Manifest.permission.ACCESS_WIFI_STATE,Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.SYSTEM_ALERT_WINDOW
         },100);
     }

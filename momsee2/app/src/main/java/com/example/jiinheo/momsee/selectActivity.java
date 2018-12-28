@@ -27,16 +27,18 @@ public class selectActivity extends AppCompatActivity implements View.OnClickLis
 
         switch (v.getId()){
             case R.id.bt_parent:{
-                if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_WIFI_STATE
-                )!= PackageManager.PERMISSION_GRANTED)
+                if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_WIFI_STATE)!= PackageManager.PERMISSION_GRANTED||
+                        ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED||
+                        ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS)!= PackageManager.PERMISSION_GRANTED)
                     startActivity(new Intent(this,P_permissionActivity.class));
                 else
                     startActivity(new Intent(this,Parent_main.class));
                 break;
             }
             case R.id.bt_child:{
-                if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_WIFI_STATE
-                )!= PackageManager.PERMISSION_GRANTED)
+                if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_WIFI_STATE)!= PackageManager.PERMISSION_GRANTED||
+                        ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED||
+                        ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS)!= PackageManager.PERMISSION_GRANTED)
                     startActivity(new Intent(this,C_permissionActivity.class));
                 else
                     startActivity(new Intent(this,Parent_main.class));
