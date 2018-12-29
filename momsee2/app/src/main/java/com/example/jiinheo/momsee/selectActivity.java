@@ -27,18 +27,23 @@ public class selectActivity extends AppCompatActivity implements View.OnClickLis
 
         switch (v.getId()){
             case R.id.bt_parent:{
-                if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_WIFI_STATE)!= PackageManager.PERMISSION_GRANTED||
-                        ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED||
-                        ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS)!= PackageManager.PERMISSION_GRANTED)
+                if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_WIFI_STATE
+                )!= PackageManager.PERMISSION_GRANTED)
                     startActivity(new Intent(this,P_permissionActivity.class));
-                else
-                    startActivity(new Intent(this,Parent_main.class));
+                else {
+                    Intent intent = getIntent();    //  나중에 수정할 부분 ...
+                    String userEmail = intent.getStringExtra("userEmail");
+
+                    Intent intent2 = new Intent(selectActivity.this, Parent_main.class);
+                    intent2.putExtra("userEmail", userEmail);
+
+                    selectActivity.this.startActivity(intent2);
+                }
                 break;
             }
             case R.id.bt_child:{
-                if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_WIFI_STATE)!= PackageManager.PERMISSION_GRANTED||
-                        ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED||
-                        ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS)!= PackageManager.PERMISSION_GRANTED)
+                if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_WIFI_STATE
+                )!= PackageManager.PERMISSION_GRANTED)
                     startActivity(new Intent(this,C_permissionActivity.class));
                 else
                     startActivity(new Intent(this,Parent_main.class));
