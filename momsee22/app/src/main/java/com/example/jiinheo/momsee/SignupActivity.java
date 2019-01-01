@@ -17,14 +17,18 @@ import org.json.JSONObject;
 
 public class SignupActivity extends AppCompatActivity{
     Button button;
-    final EditText Name = (EditText)findViewById(R.id.UserName);
-    final EditText email = (EditText)findViewById(R.id.email);
-    final EditText password = (EditText)findViewById(R.id.passwordcheck);
-    final EditText passwordCheck = (EditText)findViewById(R.id.passwordcheck);
+    EditText Name;
+    EditText email;
+    EditText password;
+    EditText passwordCheck;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+         Name = (EditText)findViewById(R.id.UserName);
+        email = (EditText)findViewById(R.id.email);
+        password = (EditText)findViewById(R.id.passwordcheck);
+        passwordCheck = (EditText)findViewById(R.id.passwordcheck);
         button = (Button)findViewById(R.id.button_OK);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
