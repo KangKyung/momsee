@@ -1,6 +1,7 @@
 package com.example.jiinheo.momsee;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Layout;
@@ -27,6 +28,7 @@ public class activity_child_info extends AppCompatActivity {
         ListViewAdapter adapter = new ListViewAdapter();
         listView = (ListView)findViewById(R.id.listview1);
         listView.setAdapter(adapter);
+
         adapter.addItem("강경훈");
         adapter.addItem("이세찬");
         adapter.addItem("허지인");

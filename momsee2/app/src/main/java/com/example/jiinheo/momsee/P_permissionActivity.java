@@ -36,8 +36,10 @@ public class P_permissionActivity extends AppCompatActivity implements View.OnCl
     private void CheckPermission(){
 
              ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
-             Manifest.permission.ACCESS_COARSE_LOCATION
-             },100);
+             Manifest.permission.ACCESS_COARSE_LOCATION,
+             ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS,Manifest.permission.ACCESS_WIFI_STATE,Manifest.permission.CONTROL_LOCATION_UPDATES,
+             Manifest.permission.SYSTEM_ALERT_WINDOW
+             },100));
         }
 
     @Override
