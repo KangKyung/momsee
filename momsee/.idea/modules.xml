@@ -4,12 +4,10 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://C:\Users\rudgn\AndroidStudioProjects\momsee\momsee\app\app.iml" filepath="C:\Users\rudgn\AndroidStudioProjects\momsee\momsee\app\app.iml" />
-      <module fileurl="file://C:\Users\gjgustjd\AndroidStudioProjects\momssee\momsee\app\app.iml" filepath="C:\Users\gjgustjd\AndroidStudioProjects\momssee\momsee\app\app.iml" />
       <module fileurl="file://C:\Users\rudgn\momsee\momsee\app\app.iml" filepath="C:\Users\rudgn\momsee\momsee\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/momsee.iml" filepath="$PROJECT_DIR$/momsee.iml" />
       <module fileurl="file://C:\Users\rudgn\momsee\momsee\momsee.iml" filepath="C:\Users\rudgn\momsee\momsee\momsee.iml" />
       <module fileurl="file://C:\Users\rudgn\AndroidStudioProjects\momsee\momsee\momsee.iml" filepath="C:\Users\rudgn\AndroidStudioProjects\momsee\momsee\momsee.iml" />
-      <module fileurl="file://C:\Users\gjgustjd\AndroidStudioProjects\momssee\momsee\momsee.iml" filepath="C:\Users\gjgustjd\AndroidStudioProjects\momssee\momsee\momsee.iml" />
     </modules>
   </component>
 </project>
