@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Parent_main extends TabActivity {
 TabHost tabHost;
@@ -35,10 +36,11 @@ TabHost tabHost;
 
         tabHost.getTabWidget().setCurrentTab(0);
 
-        TextView welcomeMessage = (TextView) findViewById(R.id.welcomeMessage);
+        //TextView welcomeMessage = (TextView) findViewById(R.id.welcomeMessage);
         Intent intent2 = getIntent();
         String userName = intent2.getStringExtra("userEmail");  //  나중에 이 부분 이메일이 아니라 userName으로 수정하자!!
-        String message = "환영합니다, " + userName + "님!";
-        welcomeMessage.setText(message);
+        String message = "환영합니다,  " + userName + "님!";
+        Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
+        //welcomeMessage.setText(message);
     }
 }
