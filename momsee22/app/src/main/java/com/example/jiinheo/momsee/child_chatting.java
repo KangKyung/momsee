@@ -20,14 +20,10 @@ public class child_chatting extends AppCompatActivity {
         setContentView(R.layout.children_info);
 
         ArrayList<String> MyListView = new ArrayList<String>();
-        MyListView.add("1번 자식과의 채팅");
-        MyListView.add("2번 자식과의 채팅");
-        MyListView.add("3번 자식과의 채팅");
-        MyListView.add("4번 자식과의 채팅");
-        MyListView.add("5번 자식과의 채팅");
-        MyListView.add("6번 자식과의 채팅");
-        MyListView.add("7번 자식과의 채팅");
-
+        MyListView.add("강경훈과의 채팅");
+        MyListView.add("이세찬과의 채팅");
+        MyListView.add("허지인과의 채팅");
+        MyListView.add("허현성과의 채팅");
 
         ArrayAdapter<String> MyArrayAdapter;
         MyArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, MyListView);
@@ -46,7 +42,7 @@ public class child_chatting extends AppCompatActivity {
         MyList.setDivider(new ColorDrawable(Color.GRAY));
         //항목 사이 구분선
 
-        MyList.setDividerHeight(70);
+        MyList.setDividerHeight(10);
         //구분선 높이 지정
 
 

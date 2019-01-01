@@ -1,6 +1,8 @@
 package com.example.jiinheo.momsee;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Layout;
@@ -33,6 +35,8 @@ public class activity_child_info extends AppCompatActivity {
         adapter.addItem("허현성");
 
 
+
+
     }
     public class ListViewAdapter extends BaseAdapter{
         private ArrayList<ListViewItem> listViewItemList = new ArrayList<ListViewItem>();
@@ -55,6 +59,7 @@ public class activity_child_info extends AppCompatActivity {
             childName.setText(listViewItem.getS());
             return convertView;
         }
+
         @Override
         public long getItemId(int position){
             return position;
@@ -66,9 +71,7 @@ public class activity_child_info extends AppCompatActivity {
         public void addItem(String Name){
             ListViewItem item = new ListViewItem();
             item.setS(Name);
-            listViewItemList.add(item);
         }
-
 
     }
     public class ListViewItem {

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.jiinheo.hw2.MainActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="19dp"
+            android:text="서울 대기질 정보"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textView"
+            android:layout_marginTop="9dp">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignStart="@+id/editText_date"
+                android:layout_marginTop="29dp"
+                android:textSize="20dp"
+                android:text="날짜 별 대기질" />
+
+            <EditText
+                android:id="@+id/editText_date"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textView2"
+                android:layout_marginStart="27dp"
+                android:layout_marginTop="32dp"
+                android:hint="20XX년X월X일"
+                android:gravity="center"
+                android:ems="10"
+                android:inputType="textPersonName"/>
+
+            <EditText
+                android:id="@+id/editText2"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/editText_date"
+                android:layout_marginStart="9dp"
+                android:layout_toEndOf="@+id/editText_date"
+                android:ems="10"
+                android:inputType="date"
+                android:hint="지역명"
+                android:gravity="center"/>
+
+            <Button
+                android:id="@+id/date_bt"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/editText2"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="11dp"
+                android:text="조회" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="65dp">
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/editText3"
+                android:layout_alignStart="@+id/editText3"
+                android:layout_marginBottom="52dp"
+                android:textSize="20dp"
+                android:text="오늘의 미세먼지" />
+
+            <EditText
+                android:id="@+id/editText3"
+                android:layout_width="290dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="23dp"
+                android:layout_marginTop="81dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="지역명"
+                android:gravity="center"/>
+
+            <Button
+                android:id="@+id/today"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/editText3"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="11dp"
+                android:text="조회_bt" />
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="14dp"
+                android:text="HW2-2" />
+        </RelativeLayout>
+    </RelativeLayout>
+</android.support.constraint.ConstraintLayout>

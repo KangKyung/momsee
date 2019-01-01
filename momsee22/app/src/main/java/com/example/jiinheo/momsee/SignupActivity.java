@@ -26,6 +26,7 @@ public class SignupActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
         button = (Button)findViewById(R.id.button_OK);
+
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
                 String userID = email.getText().toString();
