@@ -36,6 +36,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
     double mLatitude;  //위도
     double mLongitude; //경도
 
+//  왜 안지워지니??
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
