@@ -32,10 +32,7 @@ public class SignupActivity extends AppCompatActivity{
                 String userEmail = email.getText().toString();
                 String userPassword = password.getText().toString();
                 String pwCheck = passwordCheck.getText().toString();    //  이부분 이후에 구현 !!
-                String parentName = Name.getText().toString();
-                String parentHardAd = "example";
-                String parentAge = "example";
-                String childCount = "example";
+                String userName = Name.getText().toString();
 
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
@@ -65,7 +62,7 @@ public class SignupActivity extends AppCompatActivity{
                         }
                     }
                 };
-                SignupRequest registerRequest = new SignupRequest(userEmail, userPassword, parentName, parentHardAd, parentAge, childCount, responseListener);
+                SignupRequest registerRequest = new SignupRequest(userEmail, userPassword, userName, responseListener);
                 RequestQueue queue = Volley.newRequestQueue(SignupActivity.this);
                 queue.add(registerRequest);
             }
