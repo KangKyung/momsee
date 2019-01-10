@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/SocketTest.iml" filepath="$PROJECT_DIR$/SocketTest.iml" />
+      <module fileurl="file://C:\Users\rudgn\momsee\SocketTest\SocketTest.iml" filepath="C:\Users\rudgn\momsee\SocketTest\SocketTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\rudgn\momsee\SocketTest\app\app.iml" filepath="C:\Users\rudgn\momsee\SocketTest\app\app.iml" />
+    </modules>
+  </component>
+</project>

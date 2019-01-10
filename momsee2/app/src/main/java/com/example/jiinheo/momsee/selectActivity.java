@@ -46,7 +46,7 @@ public class selectActivity extends AppCompatActivity implements View.OnClickLis
                 )!= PackageManager.PERMISSION_GRANTED)
                     startActivity(new Intent(this,C_permissionActivity.class));
                 else
-                    startActivity(new Intent(this,Parent_main.class));
+                    startActivity(new Intent(this, Child_name.class));
                 break;
             }
         }

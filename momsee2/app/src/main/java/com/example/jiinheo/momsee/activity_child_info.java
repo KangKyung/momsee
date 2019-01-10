@@ -1,34 +1,29 @@
 package com.example.jiinheo.momsee;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-
 public class activity_child_info extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.children_info);
+        setContentView(R.layout.activity_children_info);
         ListView listView;
         ListViewAdapter adapter = new ListViewAdapter();
         listView = (ListView)findViewById(R.id.listview1);
         listView.setAdapter(adapter);
 
+        //자식테이블에서 정보를 갖고와야됨
         adapter.addItem("강경훈");
         adapter.addItem("이세찬");
         adapter.addItem("허지인");
@@ -49,7 +44,7 @@ public class activity_child_info extends AppCompatActivity {
             final Context context = parent.getContext();
             if(convertView == null){
                 LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                convertView = inflater.inflate(R.layout.child_info_item,parent,false);
+                convertView = inflater.inflate(R.layout.activity_child_info_item,parent,false);
             }
             TextView childName = (TextView)convertView.findViewById(R.id.childName);
 
