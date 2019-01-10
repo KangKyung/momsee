@@ -81,7 +81,7 @@ public class MainActivity extends Activity {
 
                 Log.d("TCP", "C: Connecting...");
 
-                Socket socket = new Socket(serverAddr, serverPort);
+                Socket socket = new Socket(serverAddr,serverPort);
 
                 try {
                     Log.d("TCP", "C: Sending: '" + msg + "'");
