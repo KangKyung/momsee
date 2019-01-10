@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
 public class activity_child_info extends AppCompatActivity {
 
     @Override
@@ -23,7 +24,6 @@ public class activity_child_info extends AppCompatActivity {
         listView = (ListView)findViewById(R.id.listview1);
         listView.setAdapter(adapter);
 
-        //자식테이블에서 정보를 갖고와야됨
         adapter.addItem("강경훈");
         adapter.addItem("이세찬");
         adapter.addItem("허지인");

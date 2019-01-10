@@ -51,7 +51,6 @@ public class child_chatting extends AppCompatActivity {
                 int pposition = position +1;
                 switch(pposition){
                     case 1:
-                        startActivity(new Intent(getApplicationContext(),OnChatting.class));
                         break;
                 }
 

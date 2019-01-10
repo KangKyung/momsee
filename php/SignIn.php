@@ -4,12 +4,12 @@
  $userEmail = $_POST["userEmail"];
  $userPassword = $_POST["userPassword"];
  
- $statement = mysqli_prepare($con, "SELECT * FROM USER WHERE userEmail = ? AND userPassword = ?");
+ $statement = mysqli_prepare($con, "SELECT * FROM userParents WHERE userEmail = ? AND userPassword = ?");
  mysqli_stmt_bind_param($statement, "ss", $userEmail, $userPassword);
  mysqli_stmt_execute($statement);
  
  mysqli_stmt_store_result($statement);
- mysqli_stmt_bind_result($statement, $userEmail, $userPassword, $userName);
+ mysqli_stmt_bind_result($statement, $userEmail, $userPassword, $parentName, $parentHardAd, $parentAge, $childCount);
  
  $response = array();
  $response["success"] = false;
@@ -18,7 +18,10 @@
   $response["success"] = true;
   $response["userEmail"] = $userEmail;
   $response["userPassword"] = $userPassword;
-  $response["userName"] = $userName;
+  $response["parentName"] = $parentName;
+  $response["parentHardAd"] = $parentHardAd;
+  $response["parentAge"] = $parentAge;
+  $response["childCount"] = $childCount;
  }
  
  echo json_encode($response); 
