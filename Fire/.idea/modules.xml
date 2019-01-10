@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-<<<<<<< HEAD
-=======
+      <module fileurl="file://$PROJECT_DIR$/Fire.iml" filepath="$PROJECT_DIR$/Fire.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
->>>>>>> f001609869ddae875ef85721a0f05345db57ad96
-      <module fileurl="file://$PROJECT_DIR$/momsee2.iml" filepath="$PROJECT_DIR$/momsee2.iml" />
     </modules>
   </component>
 </project>
