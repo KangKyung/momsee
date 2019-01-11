@@ -4,14 +4,19 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -51,15 +56,33 @@ public class OnChatting extends AppCompatActivity implements View.OnClickListene
         MyList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         MyList.setDivider(new ColorDrawable(Color.GRAY));
         MyList.setDividerHeight(10);
+        firebaseDatabase.getInstance().getReference().addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    try {
+                    }
+                    catch(Exception e){
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
     }
+
 
     public class ChatData {
         private String userName;
         private String message;
+        public ChatData(){
 
-        public ChatData() { }
-
+        }
         public ChatData(String userName, String message) {
             this.userName = userName;
             this.message = message;
