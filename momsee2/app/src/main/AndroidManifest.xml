@@ -46,8 +46,7 @@
         <activity android:name=".child_chatting" />
         <activity android:name=".Child_name" />
         <activity android:name=".Child_main" />
-        <activity android:name=".Child_main_home" />
-        <activity android:name=".OnChatting"></activity>
+        <activity android:name=".Child_main_home"></activity>
     </application>
 
 </manifest>
