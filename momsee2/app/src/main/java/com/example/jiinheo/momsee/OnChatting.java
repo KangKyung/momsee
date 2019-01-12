@@ -19,6 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 
 public class OnChatting extends AppCompatActivity implements View.OnClickListener {
@@ -50,28 +51,40 @@ public class OnChatting extends AppCompatActivity implements View.OnClickListene
         userName = "user" + new Random().nextInt(10000);
         ArrayList<String> MyListView = new ArrayList<String>();
         ArrayAdapter<String> MyArrayAdapter;
-        MyArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, MyListView);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, MyListView);
         ListView MyList= (ListView)findViewById(R.id.listview1);
-        MyList.setAdapter(MyArrayAdapter);
+        MyList.setAdapter(adapter);
         MyList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         MyList.setDivider(new ColorDrawable(Color.GRAY));
         MyList.setDividerHeight(10);
-        firebaseDatabase.getInstance().getReference().addValueEventListener(new ValueEventListener() {
+        databaseReference.child("message").addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+            public void onChildAdded(DataSnapshot dataSnapshot,String s) {
                     try {
+                        Iterator i = dataSnapshot.getChildren().iterator();
+                            String my_value1 =
+                                    (String) ((DataSnapshot) i.next()).getValue();
+                            String my_value2 =
+                                    (String) ((DataSnapshot) i.next()).getValue();
+                            ChatData chatData = new ChatData(my_value1, my_value2);
+                            adapter.add(chatData.getUserName() + ": " + chatData.getMessage());
                     }
                     catch(Exception e){
                         e.printStackTrace();
                     }
-                }
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) { }
 
-            }
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) { }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) { }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) { }
         });
 
     }
