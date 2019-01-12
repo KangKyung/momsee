@@ -8,9 +8,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Iterator;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
@@ -40,6 +44,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         userName = "user" + new Random().nextInt(10000);
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1);
         listView.setAdapter(adapter);
+        databaseReference.child("message").addChildEventListener(new ChildEventListener() {  // message는 child의 이벤트를 수신합니다.
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                try {
+                    Iterator i = dataSnapshot.getChildren().iterator();
+                        String my_value1 =
+                                (String) ((DataSnapshot) i.next()).getValue();
+                       String my_value2 =
+                                (String) ((DataSnapshot) i.next()).getValue();
+                    ChatData chatData = new ChatData(my_value1,my_value2);
+                    adapter.add(chatData.getUserName() + ": " + chatData.getMessage());  // adapter에 추가합니다.
+                }
+                catch(Exception e){
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) { }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) { }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) { }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) { }
+        });
     }
 
 
