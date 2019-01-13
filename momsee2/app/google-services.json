@@ -1,66 +1,35 @@
 {
   "project_info": {
-    "project_number": "65861574596",
-    "firebase_url": "https://fire-e11db.firebaseio.com",
-    "project_id": "fire-e11db",
-    "storage_bucket": "fire-e11db.appspot.com"
+    "project_number": "852093333822",
+    "firebase_url": "https://momsee2.firebaseio.com",
+    "project_id": "momsee2",
+    "storage_bucket": "momsee2.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:65861574596:android:cab1fcdff708fc3e",
-        "android_client_info": {
-          "package_name": "com.example.gjgustjd"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "65861574596-2e2o330t3cn6jqn3ujtombueo3b6f3o6.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBjfg7gge7KeFqTpi15_Dwsfk8sXUGFrvM"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:65861574596:android:5c702f3ba064ea96",
+        "mobilesdk_app_id": "1:852093333822:android:5c702f3ba064ea96",
         "android_client_info": {
           "package_name": "com.example.jiinheo.momsee"
         }
       },
       "oauth_client": [
         {
-          "client_id": "65861574596-465vnbdvpr6og60ilejds9dkrfca05te.apps.googleusercontent.com",
+          "client_id": "852093333822-2avpnn04delnp6gjf1lran0qfsa8is9q.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.jiinheo.momsee",
-            "certificate_hash": "ac5997b4ee036ce5c2fe4873322787739ea992fc"
+            "certificate_hash": "6ac8dd19b17767a15bca7ea569a4cf56e42c49e0"
           }
         },
         {
-          "client_id": "65861574596-2e2o330t3cn6jqn3ujtombueo3b6f3o6.apps.googleusercontent.com",
+          "client_id": "852093333822-beqoua6bndao7v59l5vuujdrojsrb46i.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBjfg7gge7KeFqTpi15_Dwsfk8sXUGFrvM"
+          "current_key": "AIzaSyAfay6nRGrYQsgxMcvDiEmPA0RkmxsZCF8"
         }
       ],
       "services": {
@@ -71,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "65861574596-2e2o330t3cn6jqn3ujtombueo3b6f3o6.apps.googleusercontent.com",
+              "client_id": "852093333822-beqoua6bndao7v59l5vuujdrojsrb46i.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
