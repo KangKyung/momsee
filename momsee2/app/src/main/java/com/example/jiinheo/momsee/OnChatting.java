@@ -1,5 +1,6 @@
 package com.example.jiinheo.momsee;
 
+import android.database.DataSetObserver;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
@@ -34,14 +35,19 @@ public class OnChatting extends AppCompatActivity implements View.OnClickListene
     @Override
     public void onClick(View v) {
         ChatData chatData = new ChatData(userName, editText.getText().toString());
-        databaseReference.child("message").push().setValue(chatData);
-        editText.setText("");
+        try {
+            databaseReference.child("message").push().setValue(chatData);
+            editText.setText("");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_on_chatting);
+
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
         listView = (ListView) findViewById(R.id.listView);
@@ -52,11 +58,25 @@ public class OnChatting extends AppCompatActivity implements View.OnClickListene
         ArrayList<String> MyListView = new ArrayList<String>();
         ArrayAdapter<String> MyArrayAdapter;
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, MyListView);
-        ListView MyList= (ListView)findViewById(R.id.listview1);
+        ListView MyList= (ListView)findViewById(R.id.listView);
         MyList.setAdapter(adapter);
         MyList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         MyList.setDivider(new ColorDrawable(Color.GRAY));
+        listView.setTranscriptMode(ListView.TRANSCRIPT_MODE_ALWAYS_SCROLL);
         MyList.setDividerHeight(10);
+       adapter.registerDataSetObserver(new DataSetObserver() {
+
+            @Override
+
+            public void onChanged() {
+
+                super.onChanged();
+
+                listView.setSelection(adapter.getCount()-1);
+
+            }
+
+        });
         databaseReference.child("message").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot,String s) {
@@ -90,7 +110,7 @@ public class OnChatting extends AppCompatActivity implements View.OnClickListene
     }
 
 
-    public class ChatData {
+    public static class ChatData {
         private String userName;
         private String message;
         public ChatData(){
