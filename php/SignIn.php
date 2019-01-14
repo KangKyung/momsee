@@ -9,13 +9,14 @@
  mysqli_stmt_execute($statement);
  
  mysqli_stmt_store_result($statement);
- mysqli_stmt_bind_result($statement, $userEmail, $userPassword, $parentName, $parentHardAd, $parentAge, $childCount);
+ mysqli_stmt_bind_result($statement, $parent_num, $userEmail, $userPassword, $parentName, $parentHardAd, $parentAge, $childCount);
  
  $response = array();
  $response["success"] = false;
  
  while(mysqli_stmt_fetch($statement)){ 
   $response["success"] = true;
+  $response["parent_num"] = $parent_num;
   $response["userEmail"] = $userEmail;
   $response["userPassword"] = $userPassword;
   $response["parentName"] = $parentName;
