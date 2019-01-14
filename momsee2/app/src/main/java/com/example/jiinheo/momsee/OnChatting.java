@@ -35,14 +35,19 @@ public class OnChatting extends AppCompatActivity implements View.OnClickListene
     @Override
     public void onClick(View v) {
         ChatData chatData = new ChatData(userName, editText.getText().toString());
-        databaseReference.child("message").push().setValue(chatData);
-        editText.setText("");
+        try {
+            databaseReference.child("message").push().setValue(chatData);
+            editText.setText("");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_on_chatting);
+
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
         listView = (ListView) findViewById(R.id.listView);
@@ -105,7 +110,7 @@ public class OnChatting extends AppCompatActivity implements View.OnClickListene
     }
 
 
-    public class ChatData {
+    public static class ChatData {
         private String userName;
         private String message;
         public ChatData(){
