@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "65861574596-gaplk3h39ocunhurfm3bi5im0nh5pukm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.jiinheo.momsee",
+            "certificate_hash": "0741a5d84ccdbfd6c4ecdad60260f6578a68f134"
+          }
+        },
+        {
           "client_id": "65861574596-2e2o330t3cn6jqn3ujtombueo3b6f3o6.apps.googleusercontent.com",
           "client_type": 3
         }
