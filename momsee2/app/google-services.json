@@ -31,6 +31,17 @@
           }
         },
         {
+<<<<<<< HEAD
+=======
+          "client_id": "65861574596-9nn97f8m2qpi1e5mqv5iurm0nprc9hai.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.jiinheo.momsee",
+            "certificate_hash": "0e36b6d5b872d843e68ddf8530a08f1801a7014a"
+          }
+        },
+        {
+>>>>>>> 8267fca3a0330a04e25dacf2a0ca852702725e53
           "client_id": "65861574596-2e2o330t3cn6jqn3ujtombueo3b6f3o6.apps.googleusercontent.com",
           "client_type": 3
         }
