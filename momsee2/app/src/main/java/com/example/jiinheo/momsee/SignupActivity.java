@@ -24,6 +24,27 @@ import java.util.List;
 public class SignupActivity extends AppCompatActivity{
     Button button;
     EditText Name,password,passwordCheck,email;
+
+    public static String getMACAddress(String interfaceName) {
+        try {
+            List<NetworkInterface> interfaces = Collections.list(NetworkInterface.getNetworkInterfaces());
+            for (NetworkInterface intf : interfaces) {
+                if (interfaceName != null) {
+                    if (!intf.getName().equalsIgnoreCase(interfaceName)) continue;
+                }
+                byte[] mac = intf.getHardwareAddress();
+                if (mac==null) return "";
+                StringBuilder buf = new StringBuilder();
+                for (int idx=0; idx<mac.length; idx++)
+                    buf.append(String.format("%02X:", mac[idx]));
+                if (buf.length()>0) buf.deleteCharAt(buf.length()-1);
+                return buf.toString();
+            }
+        } catch (Exception ex) { } // for now eat exceptions
+
+        return "";
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +59,10 @@ public class SignupActivity extends AppCompatActivity{
                 String userEmail = email.getText().toString();
                 String userPassword = password.getText().toString();
                 String pwCheck = passwordCheck.getText().toString();    //  이부분 이후에 구현 !!
-                String userName = Name.getText().toString();
+                String parentName = Name.getText().toString();
+                String parentHardAd = getMACAddress("wlan0");
+                String parentAge = "example";
+                String childCount = "example";
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -67,31 +91,13 @@ public class SignupActivity extends AppCompatActivity{
                         }
                     }
                 };
-                SignupRequest registerRequest = new SignupRequest(userEmail, userPassword, userName, responseListener);
+                SignupRequest registerRequest = new SignupRequest(userEmail, userPassword, parentName, parentHardAd, parentAge, childCount, responseListener);
                 RequestQueue queue = Volley.newRequestQueue(SignupActivity.this);
                 queue.add(registerRequest);
             }
         });
     }
-    public static String getMACAddress(String interfaceName) {
-        try {
-            List<NetworkInterface> interfaces = Collections.list(NetworkInterface.getNetworkInterfaces());
-            for (NetworkInterface intf : interfaces) {
-                if (interfaceName != null) {
-                    if (!intf.getName().equalsIgnoreCase(interfaceName)) continue;
-                }
-                byte[] mac = intf.getHardwareAddress();
-                if (mac==null) return "";
-                StringBuilder buf = new StringBuilder();
-                for (int idx=0; idx<mac.length; idx++)
-                    buf.append(String.format("%02X:", mac[idx]));
-                if (buf.length()>0) buf.deleteCharAt(buf.length()-1);
-                return buf.toString();
-            }
-        } catch (Exception ex) { } // for now eat exceptions
 
-        return "";
-    }
     public class Account{
         private String UserEmail;
         private String Password;
