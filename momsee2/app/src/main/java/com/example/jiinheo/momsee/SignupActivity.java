@@ -11,6 +11,8 @@ import android.widget.EditText;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,27 +24,6 @@ import java.util.List;
 public class SignupActivity extends AppCompatActivity{
     Button button;
     EditText Name,password,passwordCheck,email;
-
-    public static String getMACAddress(String interfaceName) {
-        try {
-            List<NetworkInterface> interfaces = Collections.list(NetworkInterface.getNetworkInterfaces());
-            for (NetworkInterface intf : interfaces) {
-                if (interfaceName != null) {
-                    if (!intf.getName().equalsIgnoreCase(interfaceName)) continue;
-                }
-                byte[] mac = intf.getHardwareAddress();
-                if (mac==null) return "";
-                StringBuilder buf = new StringBuilder();
-                for (int idx=0; idx<mac.length; idx++)
-                    buf.append(String.format("%02X:", mac[idx]));
-                if (buf.length()>0) buf.deleteCharAt(buf.length()-1);
-                return buf.toString();
-            }
-        } catch (Exception ex) { } // for now eat exceptions
-
-        return "";
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,11 +38,7 @@ public class SignupActivity extends AppCompatActivity{
                 String userEmail = email.getText().toString();
                 String userPassword = password.getText().toString();
                 String pwCheck = passwordCheck.getText().toString();    //  이부분 이후에 구현 !!
-                String parentName = Name.getText().toString();
-                String parentHardAd = getMACAddress("wlan0");
-                String parentAge = "example";
-                String childCount = "example";
-
+                String userName = Name.getText().toString();
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -90,13 +67,78 @@ public class SignupActivity extends AppCompatActivity{
                         }
                     }
                 };
-
-
-
-                SignupRequest registerRequest = new SignupRequest(userEmail, userPassword, parentName, parentHardAd, parentAge, childCount, responseListener);
+                SignupRequest registerRequest = new SignupRequest(userEmail, userPassword, userName, responseListener);
                 RequestQueue queue = Volley.newRequestQueue(SignupActivity.this);
                 queue.add(registerRequest);
             }
         });
+    }
+    public static String getMACAddress(String interfaceName) {
+        try {
+            List<NetworkInterface> interfaces = Collections.list(NetworkInterface.getNetworkInterfaces());
+            for (NetworkInterface intf : interfaces) {
+                if (interfaceName != null) {
+                    if (!intf.getName().equalsIgnoreCase(interfaceName)) continue;
+                }
+                byte[] mac = intf.getHardwareAddress();
+                if (mac==null) return "";
+                StringBuilder buf = new StringBuilder();
+                for (int idx=0; idx<mac.length; idx++)
+                    buf.append(String.format("%02X:", mac[idx]));
+                if (buf.length()>0) buf.deleteCharAt(buf.length()-1);
+                return buf.toString();
+            }
+        } catch (Exception ex) { } // for now eat exceptions
+
+        return "";
+    }
+    public class Account{
+        private String UserEmail;
+        private String Password;
+        private String MacAddress;
+        private String Position;
+        private String ParentEmail;
+        private String UserName;
+        public Account(String UserEmail,String Password,String MacAddress,String Position,String ParentEmail,String UserName){
+            this.UserEmail = UserEmail;
+            this.Password = Password;
+            this.MacAddress = MacAddress;
+            this.Position = Position;
+            this.ParentEmail = ParentEmail;
+            this.UserName = UserName;
+        }
+        public String getUserEmail(){return UserEmail;}
+        public String getPassword(){return Password;}
+        public String getMacAddress(){return MacAddress;}
+        public String getPosition(){return Position;}
+        public String getParentEmail(){return ParentEmail;}
+        public String getUserName(){return UserName;}
+    }
+    public class ChatData {
+        private String userName;
+        private String message;
+        public ChatData(){
+
+        }
+        public ChatData(String userName, String message) {
+            this.userName = userName;
+            this.message = message;
+        }
+
+        public String getUserName() {
+            return userName;
+        }
+
+        public void setUserName(String userName) {
+            this.userName = userName;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+
+        public void setMessage(String message) {
+            this.message = message;
+        }
     }
 }
