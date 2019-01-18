@@ -11,7 +11,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -20,7 +19,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Random;
 
 public class OnChatting extends AppCompatActivity implements View.OnClickListener {
@@ -34,9 +35,15 @@ public class OnChatting extends AppCompatActivity implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
-        ChatData chatData = new ChatData(userName, editText.getText().toString());
-        databaseReference.child("message").push().setValue(chatData);
-        editText.setText("");
+        try {
+            ChatData chatData = new ChatData(userName, editText.getText().toString());
+            databaseReference.child("message4").push().setValue(chatData);
+            databaseReference.child("message4").child("Test").push().setValue(chatData);
+            editText.setText("");
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -59,7 +66,7 @@ public class OnChatting extends AppCompatActivity implements View.OnClickListene
         MyList.setDivider(new ColorDrawable(Color.GRAY));
         listView.setTranscriptMode(ListView.TRANSCRIPT_MODE_ALWAYS_SCROLL);
         MyList.setDividerHeight(10);
-       adapter.registerDataSetObserver(new DataSetObserver() {
+        adapter.registerDataSetObserver(new DataSetObserver() {
 
             @Override
 
@@ -72,21 +79,21 @@ public class OnChatting extends AppCompatActivity implements View.OnClickListene
             }
 
         });
-        databaseReference.child("message").addChildEventListener(new ChildEventListener() {
+        databaseReference.child("message4").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot,String s) {
-                    try {
-                        Iterator i = dataSnapshot.getChildren().iterator();
-                            String my_value1 =
-                                    (String) ((DataSnapshot) i.next()).getValue();
-                            String my_value2 =
-                                    (String) ((DataSnapshot) i.next()).getValue();
-                            ChatData chatData = new ChatData(my_value1, my_value2);
-                            adapter.add(chatData.getUserName() + ": " + chatData.getMessage());
-                    }
-                    catch(Exception e){
-                        e.printStackTrace();
-                    }
+                try {
+                    Iterator i = dataSnapshot.getChildren().iterator();
+                    String my_value1 =
+                            (String) ((DataSnapshot) i.next()).getValue();
+                    String my_value2 =
+                            (String) ((DataSnapshot) i.next()).getValue();
+                    ChatData chatData = new ChatData(my_value1, my_value2);
+                    adapter.add(chatData.getUserName() + ": " + chatData.getMessage());
+                }
+                catch(Exception e){
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -103,8 +110,6 @@ public class OnChatting extends AppCompatActivity implements View.OnClickListene
         });
 
     }
-
-
     public class ChatData {
         private String userName;
         private String message;
@@ -133,3 +138,4 @@ public class OnChatting extends AppCompatActivity implements View.OnClickListene
         }
     }
 }
+
