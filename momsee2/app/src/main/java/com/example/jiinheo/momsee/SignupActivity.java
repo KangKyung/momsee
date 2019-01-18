@@ -24,14 +24,10 @@ import java.util.List;
 public class SignupActivity extends AppCompatActivity{
     Button button;
     EditText Name,password,passwordCheck,email;
-    private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference databaseReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference();
         email = (EditText)findViewById(R.id.email);
         password = (EditText)findViewById(R.id.password);
         passwordCheck = (EditText)findViewById(R.id.passwordcheck);
@@ -43,8 +39,6 @@ public class SignupActivity extends AppCompatActivity{
                 String userPassword = password.getText().toString();
                 String pwCheck = passwordCheck.getText().toString();    //  이부분 이후에 구현 !!
                 String userName = Name.getText().toString();
-                //이전 데이터베이스 구현
-                /*
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -76,18 +70,6 @@ public class SignupActivity extends AppCompatActivity{
                 SignupRequest registerRequest = new SignupRequest(userEmail, userPassword, userName, responseListener);
                 RequestQueue queue = Volley.newRequestQueue(SignupActivity.this);
                 queue.add(registerRequest);
-                */
-                //이전 데이터베이스 구현
-                //신 데이터베이스 구현
-                {
-                    try {
-                        Account account = new Account(email.getText().toString(),password.getText().toString(), getMACAddress("wlan0"),"P","","");
-                        ChatData chatData = new ChatData(email.getText().toString(), password.getText().toString());
-                        databaseReference.child("message").push().setValue(account);
-                    }catch(Exception e){
-                        e.printStackTrace();
-                    }
-                }
             }
         });
     }
