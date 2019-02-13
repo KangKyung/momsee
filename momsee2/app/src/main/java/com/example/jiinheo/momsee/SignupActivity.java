@@ -54,6 +54,7 @@ public class SignupActivity extends AppCompatActivity{
         passwordCheck = (EditText)findViewById(R.id.passwordcheck);
         Name = (EditText)findViewById(R.id.UserName);
         button = (Button)findViewById(R.id.button_OK);
+        //버튼클릭시
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
                 String userEmail = email.getText().toString();
@@ -98,6 +99,7 @@ public class SignupActivity extends AppCompatActivity{
         });
     }
 
+    //계정
     public class Account{
         private String UserEmail;
         private String Password;
@@ -105,6 +107,7 @@ public class SignupActivity extends AppCompatActivity{
         private String Position;
         private String ParentEmail;
         private String UserName;
+
         public Account(String UserEmail,String Password,String MacAddress,String Position,String ParentEmail,String UserName){
             this.UserEmail = UserEmail;
             this.Password = Password;
@@ -113,6 +116,7 @@ public class SignupActivity extends AppCompatActivity{
             this.ParentEmail = ParentEmail;
             this.UserName = UserName;
         }
+
         public String getUserEmail(){return UserEmail;}
         public String getPassword(){return Password;}
         public String getMacAddress(){return MacAddress;}
@@ -120,6 +124,8 @@ public class SignupActivity extends AppCompatActivity{
         public String getParentEmail(){return ParentEmail;}
         public String getUserName(){return UserName;}
     }
+
+
     public class ChatData {
         private String userName;
         private String message;

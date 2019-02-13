@@ -12,7 +12,7 @@ public interface INodeJS {
     @FormUrlEncoded
     Observable<String> registerUser(@Field("email") String email,
                                     @Field("name") String name,
-                                    @Field("password")String password);
+                                    @Field("password") String password);
 
     @POST("login")
     @FormUrlEncoded

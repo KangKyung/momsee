@@ -17,6 +17,10 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 import com.google.android.material.button.MaterialButton;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
+import java.net.NetworkInterface;
+import java.util.Collections;
+import java.util.List;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
@@ -75,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+    //파라미터 안에 final String macAdd
 
     private void registerUser(final String email, final String password) {
         final View enter_name_view = LayoutInflater.from(this).inflate(R.layout.enter_name_layout,null);
@@ -95,7 +100,9 @@ public class MainActivity extends AppCompatActivity {
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+
                         MaterialEditText edt_name=(MaterialEditText)enter_name_view.findViewById(R.id.edt_name);
+
                         compositeDisposable.add(myAPI.registerUser(email,edt_name.getText().toString(),password)
                                 .subscribeOn(Schedulers.io())
                                 .observeOn(AndroidSchedulers.mainThread())
@@ -128,4 +135,39 @@ public class MainActivity extends AppCompatActivity {
                 })
         );
     }
+    //기기의 맥주소 출력
+
+    public static String getMACAddress(String interfaceName) {
+        try {
+            List<NetworkInterface> interfaces = Collections.list(NetworkInterface.getNetworkInterfaces());
+            for (NetworkInterface intf : interfaces) {
+                if (interfaceName != null) {
+                    if (!intf.getName().equalsIgnoreCase(interfaceName)) continue;
+                }
+                byte[] mac = intf.getHardwareAddress();
+
+                if (mac==null) return "";
+                StringBuilder buf = new StringBuilder();
+
+                for (int idx=0; idx<mac.length; idx++)
+
+                    buf.append(String.format("%02X:", mac[idx]));
+
+                if (buf.length()>0) buf.deleteCharAt(buf.length()-1);
+
+                return buf.toString();
+            }
+        } catch (Exception ex) { } // for now eat exceptions
+
+        return "";
+    }
+
+
+
+    String HardwareAdd = getMACAddress("wlan0");//여기에 저장
+
+
+
+
+
 }
