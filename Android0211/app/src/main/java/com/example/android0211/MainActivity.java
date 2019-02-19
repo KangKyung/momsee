@@ -1,5 +1,6 @@
 package com.example.android0211;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -96,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
                         dialog.dismiss();
                     }
                 })
+
                 .setPositiveText("Register")
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
@@ -126,8 +128,10 @@ public class MainActivity extends AppCompatActivity {
                 .subscribe(new Consumer<String>() {
                     @Override
                     public void accept(String s) throws Exception {
-                        if(s.contains("encrypted_password"))
+                        if(s.contains("encrypted_password")){
                             Toast.makeText(MainActivity.this,"로그인 성공",Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getApplicationContext(),SelectActivty.class);
+                            startActivity(intent);}
                         else
                             Toast.makeText(MainActivity.this,""+s,Toast.LENGTH_SHORT).show();
 
