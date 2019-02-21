@@ -139,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
                 })
         );
     }
+
     //기기의 맥주소 출력
 
     public static String getMACAddress(String interfaceName) {
