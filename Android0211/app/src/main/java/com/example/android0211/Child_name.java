@@ -8,7 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+
 public class Child_name extends AppCompatActivity {
+
     Button Bt_Child_name;
     EditText Edit_Child_name;
 

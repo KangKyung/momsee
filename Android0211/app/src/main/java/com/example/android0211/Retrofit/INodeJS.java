@@ -18,4 +18,9 @@ public interface INodeJS {
     @FormUrlEncoded
     Observable<String> loginUser(@Field("email") String email,
                                  @Field("password")String password);
+    @POST("register_child")
+    @FormUrlEncoded
+    Observable<String> registerUser_child(@Field("child_name")String child_name,
+                                         @Field("email")String email,
+                                         @Field("child_age")String child_age);
 }
