@@ -35,7 +35,19 @@ public class activity_child_info extends AppCompatActivity {
     INodeJS myAPI;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
     MaterialButton addchild;
-    MaterialEditText edt_child_email,edt_child_age;
+    MaterialEditText edt_child_name,edt_child_age;
+
+    @Override
+    protected void onStop() {
+        compositeDisposable.clear();
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        compositeDisposable.clear();
+        super.onDestroy();
+    }
 
 
     @Override
@@ -57,56 +69,40 @@ public class activity_child_info extends AppCompatActivity {
         myAPI = retrofit1.create(INodeJS.class);
 
 
-        edt_child_email=(MaterialEditText)findViewById(R.id.edt_child_email);
-        edt_child_age=(MaterialEditText)findViewById(R.id.edt_child_age);
-        addchild=(MaterialButton)findViewById(R.id.addchild);
+        edt_child_name= findViewById(R.id.edt_child_name);
+        edt_child_age= findViewById(R.id.edt_child_age);
+        addchild= findViewById(R.id.addchild);
 
-        addchild.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(v.getId() == R.id.addchild)
-                    registerUser_child(edt_child_email.getText().toString(),edt_child_age.getText().toString());
-            }
+        addchild.setOnClickListener(v -> {
+            if(v.getId() == R.id.addchild)
+                registerUser_child(edt_child_name.getText().toString(),edt_child_age.getText().toString());
         });
 
 
 
     }
 
-    public void registerUser_child(final String email, final String child_age) {
+    public void registerUser_child(final String name, final String child_age) {
 
         final View enter_email_view = LayoutInflater.from(this).inflate(R.layout.activity_add_child,null);
 
         new MaterialStyledDialog.Builder(this)
                 .setTitle("자식 추가")
-                .setDescription("One more step!")
+                .setDescription("자녀 분 등록")
                 .setCustomView(enter_email_view)
+                .setIcon(R.drawable.ic_user)
                 .setNegativeText("Cancel")
-                .onNegative(new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        dialog.dismiss();
-                    }
-                })
+                .onNegative((dialog, which) -> dialog.dismiss())
                 .setPositiveText("Register")
-                .onPositive(new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                .onPositive((dialog, which) -> {
 
-                        MaterialEditText edt_child_name = (MaterialEditText)enter_email_view.findViewById(R.id.edt_child_name);
+                    MaterialEditText edt_child_email = enter_email_view.findViewById(R.id.edt_child_email);
 
-                        compositeDisposable.add(myAPI.registerUser_child(email,edt_child_name.getText().toString(),child_age)
-                                .subscribeOn(Schedulers.io())
-                                .observeOn(AndroidSchedulers.mainThread())
-                                .subscribe(new Consumer<String>() {
-                                    @Override
-                                    public void accept(String s) throws Exception {
-                                        Toast.makeText(activity_child_info.this,""+s,Toast.LENGTH_SHORT).show();
+                    compositeDisposable.add(myAPI.registerUser_child(name,edt_child_email.getText().toString(),child_age)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(s -> Toast.makeText(activity_child_info.this,""+s,Toast.LENGTH_SHORT).show()));
 
-                                    }
-                                }));
-
-                    }
                 }).show();
 
 
@@ -114,7 +110,7 @@ public class activity_child_info extends AppCompatActivity {
     }
 
     public class ListViewAdapter extends BaseAdapter {
-        private ArrayList<ListViewItem> listViewItemList = new ArrayList<ListViewItem>();
+        private ArrayList<ListViewItem> listViewItemList = new ArrayList<>();
 
         public ListViewAdapter(){}
 

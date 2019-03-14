@@ -58,25 +58,15 @@ public class MainActivity extends AppCompatActivity {
         myAPI = retrofit.create(INodeJS.class);
 
         //View
-        btn_login =(MaterialButton)findViewById(R.id.login_button);
-        btn_register = (MaterialButton) findViewById(R.id.register_button);
+        btn_login = findViewById(R.id.login_button);
+        btn_register = findViewById(R.id.register_button);
 
-        edt_email = (MaterialEditText) findViewById(R.id.edt_email);
-        edt_password = (MaterialEditText) findViewById(R.id.edt_password);
+        edt_email = findViewById(R.id.edt_email);
+        edt_password = findViewById(R.id.edt_password);
 
-        btn_login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loginUser(edt_email.getText().toString(), edt_password.getText().toString());
-            }
-        });
+        btn_login.setOnClickListener(v -> loginUser(edt_email.getText().toString(), edt_password.getText().toString()));
 
-        btn_register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                registerUser(edt_email.getText().toString(),edt_password.getText().toString());
-            }
-        });
+        btn_register.setOnClickListener(v -> registerUser(edt_email.getText().toString(),edt_password.getText().toString()));
 
 
     }
@@ -91,51 +81,38 @@ public class MainActivity extends AppCompatActivity {
                 .setCustomView(enter_name_view)
                 .setIcon(R.drawable.ic_user)
                 .setNegativeText("Cancel")
-                .onNegative(new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        dialog.dismiss();
-                    }
-                })
+                .onNegative((dialog, which) -> dialog.dismiss())
 
                 .setPositiveText("Register")
-                .onPositive(new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                .onPositive((dialog, which) -> {
 
-                        MaterialEditText edt_name=(MaterialEditText)enter_name_view.findViewById(R.id.edt_name);
+                    MaterialEditText edt_name=(MaterialEditText)enter_name_view.findViewById(R.id.edt_name);
 
-                        compositeDisposable.add(myAPI.registerUser(email,edt_name.getText().toString(),password)
-                                .subscribeOn(Schedulers.io())
-                                .observeOn(AndroidSchedulers.mainThread())
-                                .subscribe(new Consumer<String>() {
-                                    @Override
-                                    public void accept(String s) throws Exception {
-                                        Toast.makeText(MainActivity.this,""+s,Toast.LENGTH_SHORT).show();
+                    compositeDisposable.add(myAPI.registerUser(email,edt_name.getText().toString(),password)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(str -> showToast(str)));
 
-                                    }
-                                }));
-
-                    }
                 }).show();
 
+    }
+
+    private void showToast(@NonNull final String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
     private void loginUser(String email, String password) {
         compositeDisposable.add(myAPI.loginUser(email, password)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<String>() {
-                    @Override
-                    public void accept(String s) throws Exception {
-                        if(s.contains("encrypted_password")){
-                            Toast.makeText(MainActivity.this,"로그인 성공",Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getApplicationContext(),SelectActivty.class);
-                            startActivity(intent);}
-                        else
-                            Toast.makeText(MainActivity.this,""+s,Toast.LENGTH_SHORT).show();
+                .subscribe(s -> {
+                    if(s.contains("encrypted_password")){
+                        Toast.makeText(MainActivity.this,"로그인 성공",Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getApplicationContext(),SelectActivty.class);
+                        startActivity(intent);}
+                    else
+                        Toast.makeText(MainActivity.this,""+s,Toast.LENGTH_SHORT).show();
 
-                    }
                 })
         );
     }
