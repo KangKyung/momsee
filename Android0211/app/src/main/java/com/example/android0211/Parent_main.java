@@ -34,12 +34,16 @@ public class Parent_main extends TabActivity {
 
         tabHost.getTabWidget().setCurrentTab(0);
 
-        //TextView welcomeMessage = (TextView) findViewById(R.id.welcomeMessage);
-        Intent intent2 = getIntent();
-        String userName = intent2.getStringExtra("name");  //  나중에 이 부분 이메일이 아니라 userName으로 수정하자!!
-        String message = "환영합니다,  " + userName + "님!";
+        //받았어 이메일을
+        String email=getIntent().getStringExtra("email");
+        String message = "환영합니다,  " + email + "님!";
         Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
-        //welcomeMessage.setText(message);
+
+        //보냈어 이메일을
+        Intent intent1 = new Intent(getApplicationContext(),activity_child_info.class);
+        intent1.putExtra("email",email);
+        startActivity(intent1);
+
 
     }
 }

@@ -9,6 +9,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class SelectActivty extends AppCompatActivity implements View.OnClickListener {
 
@@ -18,10 +19,15 @@ public class SelectActivty extends AppCompatActivity implements View.OnClickList
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select);
-        Bt_Parent = (Button)findViewById(R.id.bt_parent);
-        Bt_Child = (Button)findViewById(R.id.bt_child);
+        Bt_Parent = findViewById(R.id.bt_parent);
+        Bt_Child = findViewById(R.id.bt_child);
         Bt_Parent.setOnClickListener(this);
         Bt_Child.setOnClickListener(this);
+
+
+
+
+        //Toast.makeText(SelectActivty.this,""+email,Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -32,13 +38,15 @@ public class SelectActivty extends AppCompatActivity implements View.OnClickList
                 )!= PackageManager.PERMISSION_GRANTED)
                     startActivity(new Intent(this,P_permissionActivity.class));
                 else {
-                    Intent intent = getIntent();    //  나중에 수정할 부분 ...
-                    String userEmail = intent.getStringExtra("userEmail");
 
-                    Intent intent2 = new Intent(SelectActivty.this, Parent_main.class);
-                    intent2.putExtra("userEmail", userEmail);
 
-                    SelectActivty.this.startActivity(intent2);
+                    //자식목록을 여기서 긁어와야됨
+                    String email = getIntent().getStringExtra("email");
+                    Intent intent = new Intent(SelectActivty.this, Parent_main.class);
+                    intent.putExtra("email",email);
+
+
+                    SelectActivty.this.startActivity(intent);
                 }
                 break;
             }
