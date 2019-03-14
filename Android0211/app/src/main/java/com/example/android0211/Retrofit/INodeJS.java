@@ -28,4 +28,7 @@ public interface INodeJS {
     @FormUrlEncoded
     Observable<String> loginUser_child(@Field("email") String email,
                         @Field("child_name") String child_name);
+    @POST("lock_unlock")
+    @FormUrlEncoded
+    Observable<String> lock_unlock(@Field("email")String email);
 }
