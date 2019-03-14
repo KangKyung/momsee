@@ -108,8 +108,14 @@ public class MainActivity extends AppCompatActivity {
                 .subscribe(s -> {
                     if(s.contains("encrypted_password")){
                         Toast.makeText(MainActivity.this,"로그인 성공",Toast.LENGTH_SHORT).show();
+                        //이메일넘김
                         Intent intent = new Intent(getApplicationContext(),SelectActivty.class);
-                        startActivity(intent);}
+                        intent.putExtra("email",email);
+
+
+                        startActivity(intent);
+
+                    }
                     else
                         Toast.makeText(MainActivity.this,""+s,Toast.LENGTH_SHORT).show();
 

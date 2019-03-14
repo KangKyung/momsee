@@ -36,6 +36,7 @@ public class activity_child_info extends AppCompatActivity {
     CompositeDisposable compositeDisposable = new CompositeDisposable();
     MaterialButton addchild;
     MaterialEditText edt_child_name,edt_child_age;
+    Button lock_unlock;
 
     @Override
     protected void onStop() {
@@ -56,7 +57,7 @@ public class activity_child_info extends AppCompatActivity {
         setContentView(R.layout.activity_children_info);
         ListView listView;
         ListViewAdapter adapter = new ListViewAdapter();
-        listView = (ListView)findViewById(R.id.listview1);
+        listView = findViewById(R.id.listview1);
         listView.setAdapter(adapter);
 
         adapter.addItem("강경훈");
@@ -68,18 +69,45 @@ public class activity_child_info extends AppCompatActivity {
         Retrofit retrofit1 = RetrofitClient.getInstance();
         myAPI = retrofit1.create(INodeJS.class);
 
-
+        lock_unlock=findViewById(R.id.lock_unlock);
         edt_child_name= findViewById(R.id.edt_child_name);
         edt_child_age= findViewById(R.id.edt_child_age);
         addchild= findViewById(R.id.addchild);
+
+        String email = getIntent().getStringExtra("email");//이메일받은것시발
 
         addchild.setOnClickListener(v -> {
             if(v.getId() == R.id.addchild)
                 registerUser_child(edt_child_name.getText().toString(),edt_child_age.getText().toString());
         });
 
+        lock_unlock.setOnClickListener(v -> {
+
+            //Toast.makeText(activity_child_info.this,""+email,Toast.LENGTH_SHORT).show();
+            lock_unlock(email);
 
 
+        });
+
+
+
+
+    }
+    private void lock_unlock(String email) {
+        compositeDisposable.add(myAPI.lock_unlock(email)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(s -> {
+                    if(s.contains("1")){
+                        Toast.makeText(activity_child_info.this,"UNLOCK",Toast.LENGTH_SHORT).show();
+
+
+                    }
+                    else
+                        Toast.makeText(activity_child_info.this,"LOCK",Toast.LENGTH_SHORT).show();
+
+                })
+        );
     }
 
     public void registerUser_child(final String name, final String child_age) {
