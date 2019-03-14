@@ -42,8 +42,11 @@
         <activity android:name=".activity_child_info" />
         <activity android:name=".C_permissionActivity" />
         <activity android:name=".Child_main" />
-        <activity android:name=".Child_main_home" />
+        <activity android:name=".Child_mission" />
         <activity android:name=".Child_name" />
+        <activity android:name=".Child_chatting" />
+        <activity android:name=".Parent_chatting" />
+        <activity android:name=".ChatBoxActivity" />
         <activity android:name=".Maps" />
         <activity android:name=".P_permissionActivity" />
         <activity android:name=".Parent_main" />

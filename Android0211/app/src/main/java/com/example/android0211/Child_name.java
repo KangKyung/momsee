@@ -50,8 +50,8 @@ public class Child_name extends AppCompatActivity {
                 .subscribe(s -> {
                     if (s.contains("child_name")) {
                         Toast.makeText(Child_name.this, "로그인 성공", Toast.LENGTH_SHORT).show();
-                        //Intent intent = new Intent(getApplicationContext(), .class);
-                        //startActivity(intent);
+                        Intent intent = new Intent(getApplicationContext(), Child_main.class);
+                        startActivity(intent);
                     } else
                         Toast.makeText(Child_name.this, "" + s, Toast.LENGTH_SHORT).show();
                 }));
