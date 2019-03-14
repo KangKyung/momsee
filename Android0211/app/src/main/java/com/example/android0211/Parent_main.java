@@ -23,7 +23,7 @@ public class Parent_main extends TabActivity {
         tabSpec = tabHost.newTabSpec("FirstTab").setIndicator("자식 목록").setContent(intent);
         tabHost.addTab(tabSpec);
 
-        //intent = new Intent(this, child_chatting.class);
+        intent = new Intent(this, Parent_chatting.class);
         tabSpec = tabHost.newTabSpec("SecondTab").setIndicator("채팅 목록").setContent(intent);
         tabHost.addTab(tabSpec);
 
