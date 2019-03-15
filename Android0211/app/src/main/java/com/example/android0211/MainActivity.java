@@ -1,6 +1,8 @@
 package com.example.android0211;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.Intent;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -53,9 +55,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         //init API
         Retrofit retrofit = RetrofitClient.getInstance();
         myAPI = retrofit.create(INodeJS.class);
+
 
         //View
         btn_login = findViewById(R.id.login_button);
@@ -86,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                 .setPositiveText("Register")
                 .onPositive((dialog, which) -> {
 
-                    MaterialEditText edt_name=(MaterialEditText)enter_name_view.findViewById(R.id.edt_name);
+                    MaterialEditText edt_name= enter_name_view.findViewById(R.id.edt_name);
 
                     compositeDisposable.add(myAPI.registerUser(email,edt_name.getText().toString(),password)
                             .subscribeOn(Schedulers.io())

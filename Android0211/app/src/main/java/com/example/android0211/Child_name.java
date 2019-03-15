@@ -1,7 +1,9 @@
 package com.example.android0211;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -25,6 +27,8 @@ public class Child_name extends AppCompatActivity {
     Button btn_child_login;
     EditText edt_child_email, edt_child_name;
 
+    private PolicyManager policyManager;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,11 +39,39 @@ public class Child_name extends AppCompatActivity {
         edt_child_email = findViewById(R.id.edt_child_email);
         edt_child_name = findViewById(R.id.edt_child_name);
 
+        Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
+        startActivity(intent);
+        policyManager = new PolicyManager(this);
+
+        if (!policyManager.isAdminActive()) {
+            Intent activateDeviceAdmin = new Intent(
+                    DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
+            activateDeviceAdmin.putExtra(
+                    DevicePolicyManager.EXTRA_DEVICE_ADMIN,
+                    policyManager.getAdminComponent());
+            activateDeviceAdmin
+                    .putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION,
+                            "After activating admin, you will be able to block application uninstallation.");
+            startActivityForResult(activateDeviceAdmin,
+                    PolicyManager.DPM_ACTIVATION_REQUEST_CODE);
+        }
+
+
+
         //init API
         Retrofit retrofit = RetrofitClient.getInstance();
         myAPI = retrofit.create(INodeJS.class);
 
-        btn_child_login.setOnClickListener(v -> loginUser_child(edt_child_email.getText().toString(), edt_child_name.getText().toString()));
+        btn_child_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loginUser_child(edt_child_email.getText().toString(), edt_child_name.getText().toString());
+                startService(new Intent(getApplicationContext(), OverlayService.class));
+
+            }
+        });
+
+
 
     }
 

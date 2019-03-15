@@ -45,5 +45,15 @@ public class Parent_main extends TabActivity {
         startActivity(intent1);
 
 
+        Intent intent2 = new Intent(getApplicationContext(),Parent_chatting.class);
+        intent2.putExtra("email",email);
+
+
+        Intent intent3 = new Intent(getApplicationContext(),Child_chatting.class);
+        intent3.putExtra("email",email);
+
+
+
+
     }
 }

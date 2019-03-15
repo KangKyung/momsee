@@ -31,4 +31,8 @@ public interface INodeJS {
     @POST("lock_unlock")
     @FormUrlEncoded
     Observable<String> lock_unlock(@Field("email")String email);
+
+    @POST("extract_parent_name")
+    @FormUrlEncoded
+    Observable<String> extract_parent_name(@Field("email")String email);
 }

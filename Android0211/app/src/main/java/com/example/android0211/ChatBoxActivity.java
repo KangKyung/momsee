@@ -36,13 +36,13 @@ public class ChatBoxActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_box);
 
-        messagetxt = (EditText) findViewById(R.id.message) ;
-        send = (Button)findViewById(R.id.send);
+        messagetxt = findViewById(R.id.message);
+        send = findViewById(R.id.send);
         // get the nickame of the user
-        Nickname= (String)getIntent().getExtras().getString(Parent_chatting.NICKNAME);
+        Nickname= getIntent().getExtras().getString(Parent_chatting.NICKNAME);
         //connect you socket client to the server
         try {
-            socket = IO.socket("http://192.168.0.101:3001");
+            socket = IO.socket("http://10.20.12.148:3001");
             socket.connect();
             socket.emit("join", Nickname);
         } catch (URISyntaxException e) {
@@ -51,7 +51,7 @@ public class ChatBoxActivity extends AppCompatActivity {
         }
         //setting up recyler
         MessageList = new ArrayList<>();
-        myRecylerView = (RecyclerView) findViewById(R.id.messagelist);
+        myRecylerView = findViewById(R.id.messagelist);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         myRecylerView.setLayoutManager(mLayoutManager);
         myRecylerView.setItemAnimator(new DefaultItemAnimator());
@@ -59,87 +59,63 @@ public class ChatBoxActivity extends AppCompatActivity {
 
 
         // message send action
-        send.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //retrieve the nickname and the message content and fire the event messagedetection
-                if(!messagetxt.getText().toString().isEmpty()){
-                    socket.emit("messagedetection",Nickname,messagetxt.getText().toString());
+        send.setOnClickListener(v -> {
+            //retrieve the nickname and the message content and fire the event messagedetection
+            if(!messagetxt.getText().toString().isEmpty()){
+                socket.emit("messagedetection",Nickname,messagetxt.getText().toString());
 
-                    messagetxt.setText(" ");
-                }
+                messagetxt.setText(" ");
             }
         });
 
         //implementing socket listeners
-        socket.on("userjoinedthechat", new Emitter.Listener() {
+        socket.on("userjoinedthechat", args -> runOnUiThread(() -> {
+            String data = (String) args[0];
+
+            Toast.makeText(ChatBoxActivity.this,data,Toast.LENGTH_SHORT).show();
+
+        }));
+        socket.on("userdisconnect", args -> runOnUiThread(new Runnable() {
             @Override
-            public void call(final Object... args) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        String data = (String) args[0];
+            public void run() {
+                String data = (String) args[0];
 
-                        Toast.makeText(ChatBoxActivity.this,data,Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChatBoxActivity.this,data,Toast.LENGTH_SHORT).show();
 
-                    }
-                });
             }
-        });
-        socket.on("userdisconnect", new Emitter.Listener() {
-            @Override
-            public void call(final Object... args) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        String data = (String) args[0];
+        }));
+        socket.on("message", args -> runOnUiThread(() -> {
+            JSONObject data = (JSONObject) args[0];
+            try {
+                //extract data from fired event
 
-                        Toast.makeText(ChatBoxActivity.this,data,Toast.LENGTH_SHORT).show();
+                String nickname = data.getString("senderNickname"); //  이름 가져오기
+                String message = data.getString("message");     //  메시지 가져오기
 
-                    }
-                });
+                // make instance of message
+
+                Message m = new Message(nickname,message);
+
+
+                //add the message to the messageList
+
+                MessageList.add(m);
+
+                // add the new updated list to the dapter
+                chatBoxAdapter = new ChatBoxAdapter(MessageList);
+
+                // notify the adapter to update the recycler view
+
+                chatBoxAdapter.notifyDataSetChanged();
+
+                //set the adapter for the recycler view
+
+                myRecylerView.setAdapter(chatBoxAdapter);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        });
-        socket.on("message", new Emitter.Listener() {
-            @Override
-            public void call(final Object... args) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        JSONObject data = (JSONObject) args[0];
-                        try {
-                            //extract data from fired event
-
-                            String nickname = data.getString("senderNickname"); //  이름 가져오기
-                            String message = data.getString("message");     //  메시지 가져오기
-
-                            // make instance of message
-
-                            Message m = new Message(nickname,message);
-
-
-                            //add the message to the messageList
-
-                            MessageList.add(m);
-
-                            // add the new updated list to the dapter
-                            chatBoxAdapter = new ChatBoxAdapter(MessageList);
-
-                            // notify the adapter to update the recycler view
-
-                            chatBoxAdapter.notifyDataSetChanged();
-
-                            //set the adapter for the recycler view
-
-                            myRecylerView.setAdapter(chatBoxAdapter);
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
-            }
-        });
+        }));
     }
 
     @Override

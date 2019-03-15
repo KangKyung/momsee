@@ -83,9 +83,8 @@ public class activity_child_info extends AppCompatActivity {
 
         lock_unlock.setOnClickListener(v -> {
 
-            //Toast.makeText(activity_child_info.this,""+email,Toast.LENGTH_SHORT).show();
-            lock_unlock(email);
 
+            lock_unlock(email);
 
         });
 

@@ -25,9 +25,6 @@ public class SelectActivty extends AppCompatActivity implements View.OnClickList
         Bt_Child.setOnClickListener(this);
 
 
-
-
-        //Toast.makeText(SelectActivty.this,""+email,Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -46,7 +43,7 @@ public class SelectActivty extends AppCompatActivity implements View.OnClickList
                     intent.putExtra("email",email);
 
 
-                    SelectActivty.this.startActivity(intent);
+                   startActivity(intent);
                 }
                 break;
             }
