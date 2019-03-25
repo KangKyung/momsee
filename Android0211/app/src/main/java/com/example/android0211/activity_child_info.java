@@ -5,13 +5,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,79 +35,73 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 
-public class activity_child_info extends AppCompatActivity {
+public class activity_child_info extends Fragment {              //프래그먼트를 상속.
     INodeJS myAPI;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
     MaterialButton addchild;
     MaterialEditText edt_child_name,edt_child_age;
     Button lock_unlock;
-
+    public  activity_child_info(){}
     @Override
-    protected void onStop() {
-        compositeDisposable.clear();
-        super.onStop();
+    public void onCreate(Bundle savedInstanceState) {
+        try {
+            super.onCreate(savedInstanceState);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
-
     @Override
-    protected void onDestroy() {
-        compositeDisposable.clear();
-        super.onDestroy();
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)           //프래그먼트가 레이아웃을 적용하는 시점
+    {
+        LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.activity_children_info, container, false);   //레이아웃 xml파일을 변수화한다.
+        try {
+            ListView listView;
+            ListViewAdapter adapter = new ListViewAdapter();
+            listView = (ListView)layout.findViewById(R.id.listview1);  //findViewById는 프래그먼트에서 바로 사용불가능하므로 layout에 대입한 레이아웃 파일에 접근하여 대입한다.
+            listView.setAdapter(adapter);
+
+            adapter.addItem("강경훈");
+            adapter.addItem("이세찬");
+            adapter.addItem("허지인");
+            adapter.addItem("허현성");
+
+            //init API
+            Retrofit retrofit1 = RetrofitClient.getInstance();
+            myAPI = retrofit1.create(INodeJS.class);
+
+            lock_unlock = (Button) layout.findViewById(R.id.lock_unlock);
+            edt_child_name = (MaterialEditText) layout.findViewById(R.id.edt_child_name);
+            edt_child_age = (MaterialEditText) layout.findViewById(R.id.edt_child_age);
+            addchild = (MaterialButton) layout.findViewById(R.id.addchild);
+
+            //String email = getIntent().getStringExtra("email");//이메일받은것시발              //이전 액티비티에서 넘어온 인텐트 코드,번들로 대체해야 함.
+
+            addchild.setOnClickListener(v -> {
+                if (v.getId() == R.id.addchild)
+                    registerUser_child(edt_child_name.getText().toString(), edt_child_age.getText().toString());
+            });
+
+            lock_unlock.setOnClickListener(v -> {
+                //lock_unlock(email);   //번들처리할 것.
+            });
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return layout;
     }
-
-
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_children_info);
-        ListView listView;
-        ListViewAdapter adapter = new ListViewAdapter();
-        listView = findViewById(R.id.listview1);
-        listView.setAdapter(adapter);
-
-        adapter.addItem("강경훈");
-        adapter.addItem("이세찬");
-        adapter.addItem("허지인");
-        adapter.addItem("허현성");
-
-        //init API
-        Retrofit retrofit1 = RetrofitClient.getInstance();
-        myAPI = retrofit1.create(INodeJS.class);
-
-        lock_unlock=findViewById(R.id.lock_unlock);
-        edt_child_name= findViewById(R.id.edt_child_name);
-        edt_child_age= findViewById(R.id.edt_child_age);
-        addchild= findViewById(R.id.addchild);
-
-        String email = getIntent().getStringExtra("email");//이메일받은것시발
-
-        addchild.setOnClickListener(v -> {
-            if(v.getId() == R.id.addchild)
-                registerUser_child(edt_child_name.getText().toString(),edt_child_age.getText().toString());
-        });
-
-        lock_unlock.setOnClickListener(v -> {
-
-
-            lock_unlock(email);
-
-        });
-
-
-
-
-    }
+    /*나머지 함수는 그대로 유지함.*/
     private void lock_unlock(String email) {
         compositeDisposable.add(myAPI.lock_unlock(email)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(s -> {
                     if(s.contains("1")){
-                        Toast.makeText(activity_child_info.this,"UNLOCK",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(),"UNLOCK",Toast.LENGTH_SHORT).show();
 
 
                     }
                     else
-                        Toast.makeText(activity_child_info.this,"LOCK",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(),"LOCK",Toast.LENGTH_SHORT).show();
 
                 })
         );
@@ -111,9 +109,9 @@ public class activity_child_info extends AppCompatActivity {
 
     public void registerUser_child(final String name, final String child_age) {
 
-        final View enter_email_view = LayoutInflater.from(this).inflate(R.layout.activity_add_child,null);
+        final View enter_email_view = LayoutInflater.from(getContext()).inflate(R.layout.activity_add_child,null);
 
-        new MaterialStyledDialog.Builder(this)
+        new MaterialStyledDialog.Builder(getContext())
                 .setTitle("자식 추가")
                 .setDescription("자녀 분 등록")
                 .setCustomView(enter_email_view)
@@ -128,7 +126,7 @@ public class activity_child_info extends AppCompatActivity {
                     compositeDisposable.add(myAPI.registerUser_child(name,edt_child_email.getText().toString(),child_age)
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(s -> Toast.makeText(activity_child_info.this,""+s,Toast.LENGTH_SHORT).show()));
+                            .subscribe(s -> Toast.makeText(getContext(),""+s,Toast.LENGTH_SHORT).show()));
 
                 }).show();
 

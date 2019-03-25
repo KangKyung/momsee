@@ -106,6 +106,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loginUser(String email, String password) {
+        if(email.equals("Test"))                              //서버 접근 필요 없이 email 란에 Test라는 문자 넣은뒤 로그인 버튼 누를 경우 서버 접속 안하고 다음 액티비티로 넘어가게 설정함.
+        {Intent intent = new Intent(getApplicationContext(),SelectActivty.class);
+            intent.putExtra("email",email);
+            startActivity(intent);}
         compositeDisposable.add(myAPI.loginUser(email, password)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
