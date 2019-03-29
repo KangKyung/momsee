@@ -41,7 +41,8 @@ public class activity_child_info extends Fragment {              //프래그먼�
     MaterialButton addchild;
     MaterialEditText edt_child_name,edt_child_age;
     Button lock_unlock;
-    public  activity_child_info(){}
+    String email;
+    public activity_child_info(){}
     @Override
     public void onCreate(Bundle savedInstanceState) {
         try {
@@ -82,7 +83,7 @@ public class activity_child_info extends Fragment {              //프래그먼�
             });
 
             lock_unlock.setOnClickListener(v -> {
-                //lock_unlock(email);   //번들처리할 것.
+                lock_unlock(this.getArguments().getString("email"));//lock_unlock(email);   //번들처리할 것.
             });
         }catch(Exception e){
             e.printStackTrace();
