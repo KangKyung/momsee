@@ -28,20 +28,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <service android:name=".OverlayService"/>
+        <service android:name=".FCMUse.OverlayService"/>
         <service
-            android:name=".FCMTest_FirebaseMessagingService">
+            android:name=".FCMUse.MyFCMService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
         </service>
-        <service android:name=".FCMTest_FirebaseInstanceIdService">
-            <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
-            </intent-filter>
-        </service>
         <receiver
-            android:name=".SampleDeviceAdminReceiver"
+            android:name=".FCMUse.SampleDeviceAdminReceiver"
             android:permission="android.permission.BIND_DEVICE_ADMIN" >
             <meta-data
                 android:name="android.app.device_admin"
@@ -52,12 +47,9 @@
                 <action android:name="android.app.action.DEVICE_ADMIN_DISABLED" />
             </intent-filter>
         </receiver>
-
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyB7ml8yPKY12_IANO0-xf_cgm7cxsXTo84" />
-
+            android:value="AIzaSyCwdrCO8axM7igdMB8-wZsOneKd5dbXKUg" />
         <activity
             android:name=".LoadingActivity"
             android:screenOrientation="portrait"></activity>
@@ -74,9 +66,9 @@
         <activity android:name=".Child_main" />
         <activity android:name=".Child_mission" />
         <activity android:name=".Child_name" />
-        <activity android:name=".Child_chatting" />
-        <activity android:name=".Parent_chatting" />
-        <activity android:name=".ChatBoxActivity" />
+        <activity android:name=".Chatting.Child_chatting" />
+        <activity android:name=".Chatting.Parent_chatting" />
+        <activity android:name=".Chatting.ChatBoxActivity" />
         <activity android:name=".Maps" />
         <activity android:name=".P_permissionActivity" />
         <activity android:name=".Parent_main" />

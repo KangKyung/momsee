@@ -11,12 +11,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.android0211.FCMUse.OverlayService;
+import com.example.android0211.FCMUse.PolicyManager;
 import com.example.android0211.Retrofit.INodeJS;
 import com.example.android0211.Retrofit.RetrofitClient;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 
@@ -66,7 +67,7 @@ public class Child_name extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 loginUser_child(edt_child_email.getText().toString(), edt_child_name.getText().toString());
-                startService(new Intent(getApplicationContext(), OverlayService.class));
+            //    startService(new Intent(getApplicationContext(), OverlayService.class));
 
             }
         });

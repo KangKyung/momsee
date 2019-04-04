@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.example.android0211.Chatting.ChatBoxActivity;
 import com.example.android0211.Retrofit.INodeJS;
 import com.example.android0211.Retrofit.RetrofitClient;
 
@@ -42,7 +43,7 @@ public class Parent_chatting extends Fragment {             //프래그먼트 �
         Retrofit retrofit1 = RetrofitClient.getInstance();
         myAPI = retrofit1.create(INodeJS.class);
 
-        String email = getArguments().getString("email")   ;    //인텐트 받아오는 부분,번들처리할 것.
+        String email = getArguments().getString("email")   ;    //인텐트 였던 부분 번들처리됨.
 
         //채팅시작 버튼
         btn.setOnClickListener(v -> {

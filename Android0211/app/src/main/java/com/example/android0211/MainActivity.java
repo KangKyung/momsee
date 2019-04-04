@@ -6,6 +6,7 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
@@ -14,8 +15,10 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.android0211.Retrofit.INodeJS;
 import com.example.android0211.Retrofit.RetrofitClient;
+import com.example.android0211.UserInfo.UserInfo;
 import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog;
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.google.android.material.button.MaterialButton;
 import com.rengwuxian.materialedittext.MaterialEditText;
@@ -31,6 +34,8 @@ import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 
 public class MainActivity extends AppCompatActivity {
+
+    UserInfo user;//유저정보를 저장하는 객체 생성
 
     INodeJS myAPI;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -54,25 +59,30 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        try {
+            String token = FirebaseInstanceId.getInstance().getToken();
+            Toast.makeText(getApplicationContext(), token, Toast.LENGTH_SHORT).show();
+            Log.i("TAGGG", token);
+            //init API
+            Retrofit retrofit = RetrofitClient.getInstance();
+            myAPI = retrofit.create(INodeJS.class);
 
 
-        //init API
-        Retrofit retrofit = RetrofitClient.getInstance();
-        myAPI = retrofit.create(INodeJS.class);
+            //View
+            btn_login = findViewById(R.id.login_button);
+            btn_register = findViewById(R.id.register_button);
 
+            edt_email = findViewById(R.id.edt_email);
+            edt_password = findViewById(R.id.edt_password);
 
-        //View
-        btn_login = findViewById(R.id.login_button);
-        btn_register = findViewById(R.id.register_button);
+            btn_login.setOnClickListener(v -> loginUser(edt_email.getText().toString(), edt_password.getText().toString()));
 
-        edt_email = findViewById(R.id.edt_email);
-        edt_password = findViewById(R.id.edt_password);
-
-        btn_login.setOnClickListener(v -> loginUser(edt_email.getText().toString(), edt_password.getText().toString()));
-
-        btn_register.setOnClickListener(v -> registerUser(edt_email.getText().toString(),edt_password.getText().toString()));
-
-
+            btn_register.setOnClickListener(v -> registerUser(edt_email.getText().toString(), edt_password.getText().toString()));
+            String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+            Toast.makeText(getApplicationContext(), refreshedToken, Toast.LENGTH_SHORT);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
     //파라미터 안에 final String macAdd
 
@@ -86,17 +96,13 @@ public class MainActivity extends AppCompatActivity {
                 .setIcon(R.drawable.ic_user)
                 .setNegativeText("Cancel")
                 .onNegative((dialog, which) -> dialog.dismiss())
-
                 .setPositiveText("Register")
                 .onPositive((dialog, which) -> {
-
                     MaterialEditText edt_name= enter_name_view.findViewById(R.id.edt_name);
-
                     compositeDisposable.add(myAPI.registerUser(email,edt_name.getText().toString(),password)
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe(str -> showToast(str)));
-
                 }).show();
 
     }
@@ -106,29 +112,35 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loginUser(String email, String password) {
-        if(email.equals("Test"))                              //서버 접근 필요 없이 email 란에 Test라는 문자 넣은뒤 로그인 버튼 누를 경우 서버 접속 안하고 다음 액티비티로 넘어가게 설정함.
+        /*if(email.equals("Test"))
         {Intent intent = new Intent(getApplicationContext(),SelectActivty.class);
             intent.putExtra("email",email);
-            startActivity(intent);}
-        compositeDisposable.add(myAPI.loginUser(email, password)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(s -> {
-                    if(s.contains("encrypted_password")){
-                        Toast.makeText(MainActivity.this,"로그인 성공",Toast.LENGTH_SHORT).show();
-                        //이메일넘김
-                        Intent intent = new Intent(getApplicationContext(),SelectActivty.class);
-                        intent.putExtra("email",email);
+            startActivity(intent);
+        }*/
+            compositeDisposable.add(myAPI.loginUser(email, password)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(s -> {
+                        if(s.contains("encrypted_password")){
+                            Toast.makeText(MainActivity.this,"로그인 성공"+s,Toast.LENGTH_LONG).show();
+                            //이메일 넘김
+                            Intent intent = new Intent(getApplicationContext(),SelectActivty.class);
+                            intent.putExtra("email",email);
+                            //여기에 유저 정보를 저장하는 객체 삽입
 
 
-                        startActivity(intent);
 
-                    }
-                    else
-                        Toast.makeText(MainActivity.this,""+s,Toast.LENGTH_SHORT).show();
+                            startActivity(intent);
 
-                })
-        );
+                        }
+                        else
+                            Toast.makeText(MainActivity.this,""+s,Toast.LENGTH_SHORT).show();
+
+                    })
+            );
+
+
+
     }
 
     //기기의 맥주소 출력

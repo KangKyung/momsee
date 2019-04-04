@@ -104,7 +104,7 @@ public class Maps extends Fragment implements OnMapReadyCallback
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        //?≫떚鍮꾪떚媛 泥섏쓬 ?앹꽦?????ㅽ뻾?섎뒗 ?⑥닔
+        //액티비티가 처음 생성될 때 실행되는 함수
 
         if(mapView != null)
         {
@@ -120,9 +120,9 @@ public class Maps extends Fragment implements OnMapReadyCallback
 
         markerOptions.position(SEOUL);
 
-        markerOptions.title("?쒖슱");
+        markerOptions.title("서울");
 
-        markerOptions.snippet("?섎룄");
+        markerOptions.snippet("수도");
 
         googleMap.addMarker(markerOptions);
 

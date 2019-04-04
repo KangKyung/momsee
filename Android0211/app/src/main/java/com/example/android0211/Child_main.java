@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.widget.TabHost;
 import android.widget.Toast;
 
+import com.example.android0211.Chatting.Child_chatting;
+
 public class Child_main extends TabActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
