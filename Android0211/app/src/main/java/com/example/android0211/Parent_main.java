@@ -73,7 +73,7 @@ public class Parent_main extends AppCompatActivity {
                     info.setArguments(bundle);
                     return info;          //자식정보 프래그먼트
                 case 1:
-                    Fragment chatting = new com.example.android0211.Chatting.Parent_chatting();
+                    Fragment chatting = new com.example.android0211.Parent_chatting();
                     chatting.setArguments(bundle);
                     return chatting;              //채팅 프래그먼트.
                 case 2:

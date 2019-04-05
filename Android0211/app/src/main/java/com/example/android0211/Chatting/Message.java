@@ -1,17 +1,13 @@
 package com.example.android0211.Chatting;
 
-import io.realm.RealmObject;
-import io.realm.annotations.Required;
+public class Message {
 
-public class Message extends RealmObject {
-
-    @Required
     private String nickname;
-    @Required
     private String message ;
 
-    public Message(){ }
+    public  Message(){
 
+    }
     public Message(String nickname, String message) {
         this.nickname = nickname;
         this.message = message;
