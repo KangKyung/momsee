@@ -7,11 +7,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.android0211.Parent_main;
 import com.example.android0211.R;
 
 public class Child_chatting extends AppCompatActivity {
     private Button btn;
-    private EditText nickname;
+//    private EditText nickname;
     public static final String NICKNAME = "usernickname";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,19 +20,23 @@ public class Child_chatting extends AppCompatActivity {
         setContentView(R.layout.activity_child_chatting);
         //call UI component  by id
         btn = (Button) findViewById(R.id.enterchat);
-        nickname = (EditText) findViewById(R.id.nickname);  //  여기에 사용자 이름을 출력 시키기 - 부모, 자녀
+//        nickname = (EditText) findViewById(R.id.nickname);  //  여기에 사용자 이름을 출력 시키기 - 부모, 자녀
+        String nickname = "child";
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //if the nickname is not empty go to chatbox activity and add the nickname to the intent extra
-                if(!nickname.getText().toString().isEmpty()){
-                    Intent i  = new Intent(Child_chatting.this,ChatBoxActivity.class);
+//                if(!nickname.getText().toString().isEmpty()){
+//                    Intent i = new Intent(Child_chatting.this, ChatBoxActivity.class);
+//                    //retreive nickname from textview and add it to intent extra
+//                    i.putExtra(NICKNAME,nickname.getText().toString());
+
+                    Intent i = new Intent(Child_chatting.this, ChatBoxActivity.class);
                     //retreive nickname from textview and add it to intent extra
-                    i.putExtra(NICKNAME,nickname.getText().toString());
+                    i.putExtra(NICKNAME,nickname);
 
                     startActivity(i);
-                }
             }
         });
 
