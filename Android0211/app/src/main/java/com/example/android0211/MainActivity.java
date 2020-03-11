@@ -9,10 +9,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.example.android0211.Chatting.ChatBoxActivity;
 import com.example.android0211.Retrofit.INodeJS;
 import com.example.android0211.Retrofit.RetrofitClient;
 import com.example.android0211.UserInfo.UserInfo;
@@ -42,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
 
     MaterialEditText edt_email, edt_password;
     MaterialButton btn_register, btn_login;
+
+    Button btnCheat;    //  임시로 만들어논놈
 
     @Override
     protected void onStop() {
@@ -74,6 +78,17 @@ public class MainActivity extends AppCompatActivity {
 
             edt_email = findViewById(R.id.edt_email);
             edt_password = findViewById(R.id.edt_password);
+
+            btnCheat = findViewById(R.id.btnCheat);    //  임시로 만들어논놈 시작
+
+            btnCheat.setOnClickListener(v -> {
+                String email = "CheatUser";
+                Intent intent = new Intent(MainActivity.this, Parent_main.class);
+                intent.putExtra("email",email);
+
+                startActivity(intent);
+            });//  임시로 만들어논놈 끝
+
 
             btn_login.setOnClickListener(v -> loginUser(edt_email.getText().toString(), edt_password.getText().toString()));
 

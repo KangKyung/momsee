@@ -37,6 +37,7 @@ public class ChatBoxAdapter  extends RecyclerView.Adapter<ChatBoxAdapter.MyViewH
     public int getItemCount() {
         return MessageList.size();
     }
+
     @Override
     public ChatBoxAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())

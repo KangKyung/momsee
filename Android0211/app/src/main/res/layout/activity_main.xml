@@ -85,4 +85,12 @@
 
     </LinearLayout>
 
+    <Button
+        android:id="@+id/btnCheat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cheat"
+        tools:layout_editor_absoluteX="147dp"
+        tools:layout_editor_absoluteY="502dp" />
+
 </android.support.constraint.ConstraintLayout>
