@@ -6,7 +6,8 @@
 
 ## 함께하는 개발자
 
-[KyungHoon Kang](https://github.com/KangKyung)
+[KyungHoon Kang](https://github.com/KangKyung)  
+[Jiin Heo](https://github.com/JIINHEO)
 
 
 ## 심사방식
