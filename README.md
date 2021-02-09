@@ -6,13 +6,12 @@
 
 ## 함께하는 개발자
 
-KyungHoon Kang  (@KangKyung)<br>
+[KyungHoon Kang](https://github.com/KangKyung)
 
 
 ## 심사방식
   [현장 발표 평가]
   - 팀별로 심사위원들의 부스 방문 시 발표하여 심사
-<br>
 
   [발표 평가 점수]
   - 총점 20점 만점으로 평가
@@ -20,8 +19,6 @@ KyungHoon Kang  (@KangKyung)<br>
   - 목표의 타당성 (4점)
   - 결과의 완성도 (6점)
   - 설계의 활용도 (4점)
-
-<br>
 
   [최종 심사결과]
 
