@@ -10,6 +10,7 @@
 [KyungHoon Kang](https://github.com/KangKyung)  
 [Jiin Heo](https://github.com/JIINHEO)  
 [SeChan Lee](https://github.com/SeChanLee)
+[HyeonSeong Heo](https://github.com/gjgut)
 
 
 ## 심사방식
