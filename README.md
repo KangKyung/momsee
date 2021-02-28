@@ -13,7 +13,7 @@
 [HyeonSeong Heo](https://github.com/gjgut)
 
 
-## 심사방식
+## 심사 기준
   [현장 발표 평가]
   - 팀별로 심사위원들의 부스 방문 시 발표하여 심사
 
