@@ -12,7 +12,7 @@
 
 [KyungHoon Kang](https://github.com/KangKyung)  
 [Jiin Heo](https://github.com/JIINHEO)  
-[SeChan Lee](https://github.com/SeChanLee)  
+[SeChan Lee](https://github.com/sechanlee0615)  
 [HyeonSeong Heo](https://github.com/gjgut)
 
 
